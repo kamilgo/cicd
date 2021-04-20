@@ -1,10 +1,12 @@
-// Sample script for instance scan feature
-// ServiceNow API: api/sn_cicd/instance_scan/[full_scan | point_scan | suite_scan/combo/{comboSysId} | suite_scan/{suiteSysId}/scoped_apps | instance_scan/suite_scan/{suiteSysId}/update_sets]
+// Sample script for /sn_cicd/app_repo/install for app customization feature
+// without ServiceNow Parameters (snParams).
 
 pipeline {
     agent any
 
     parameters {
+            string(name: "myParam", defaultValue: 'test')
+
             snParam(
                 description: "ServiceNow Parameters",
                 credentialsForPublishedApp: "f15c53d0-25d0-41ab-adce-3f60e6bc9217",
@@ -22,55 +24,41 @@ pipeline {
     stages {
         stage('configuration') {
             steps {
+                echo "Test param: ${params.myParam}"
+
                 echo "ServiceNow Parameters: ${params.snParam}"
             }
         }
-        //stage('full-scan') {
-        //    steps {
-        //        snInstanceScan(
-        //            url: 'https://chiarngqdemoauthor.service-now.com',
-        //            credentialsId: 'f15c53d0-25d0-41ab-adce-3f60e6bc9217',
-         //           scanType: 'fullScan')
-          //  }
-        //}
-         stage('point-scan') {
-             steps {
-                 snInstanceScan(
-                     url: 'https://chiarngqdemoauthor.service-now.com',
-                     credentialsId: 'f15c53d0-25d0-41ab-adce-3f60e6bc9217',
-                     scanType: 'pointScan',
-                     targetTable: 'incident',
-                     targetRecordSysId: '5b793a6e1bcb6810b54e85d5604bcb09')
-             }
-         }
-        // stage('combo-scan') {
-        //     steps {
-        //         snInstanceScan(
-        //             url: 'https://chiarngqdemoauthor.service-now.com',
-        //             credentialsId: 'f15c53d0-25d0-41ab-adce-3f60e6bc9217',
-        //             scanType: 'scanWithCombo',
-        //             comboSysId: '12ff94c51b9fa050b54e85d5604bcbc6')
-        //     }
-        // }
-        // stage('suite-scan-scoped-apps') {
-        //     steps {
-        //         snInstanceScan(
-        //             url: 'https://chiarngqdemoauthor.service-now.com',
-        //             credentialsId: 'f15c53d0-25d0-41ab-adce-3f60e6bc9217',
-        //             scanType: 'scanWithSuiteOnScopedApps',
-        //             suiteSysId: 'fc8d84891b5fa050b54e85d5604bcb6f',
-        //             requestBody: '{app_scope_sys_ids:["9058fcaa1bc36810b54e85d5604bcb12","4de70218db3a6810f0eb52c8dc961979"]}')
-        //     }
-        // }
-        // stage('suite-scan-update-sets') {
-        //     steps {
-        //         snInstanceScan(
-        //             url: 'https://chiarngqdemoauthor.service-now.com',
-        //             credentialsId: 'f15c53d0-25d0-41ab-adce-3f60e6bc9217',
-        //             scanType: 'scanWithSuiteOnUpdateSets',
-        //             suiteSysId: 'fc8d84891b5fa050b54e85d5604bcb6f',
-        //             requestBody: '{update_set_sys_ids: ["0f4ccd0ddb9f10108552ff561d961923","3dfac1fddbf9a4d0f0eb52c8dc9619b2"]}'))
-        //     }
-        // }
+        stage('publishing') {
+            steps {
+                snPublishApp(
+                    url: "https://chiarngqdemoauthor.service-now.com",
+                    credentialsId: "f15c53d0-25d0-41ab-adce-3f60e6bc9217",
+                    appScope: "x_fxi_afioristore2",
+                    obtainVersionAutomatically: true)
+
+                echo "ServiceNow Parameters after publishing stage: ${params.snParam}"
+            }
+        }
+        stage('installation') {
+            steps {
+                snInstallApp(
+                    url: "https://chiarngqdemoclient.service-now.com",
+                    credentialsId: "f15c53d0-25d0-41ab-adce-3f60e6bc9217",
+                    appScope: "x_fxi_afioristore2",
+                    appVersion: "4.3.11",
+                    baseAppAutoUpgrade: false)
+
+                echo "ServiceNow Parameters after installation stage: ${params.snParam}"
+            }
+        }
+        stage('revert-changes') {
+            steps {
+                snRollbackApp(
+                    url: "https://chiarngqdemoclient.service-now.com",
+                    credentialsId: "f15c53d0-25d0-41ab-adce-3f60e6bc9217",
+                    appScope: "x_fxi_afioristore2"
+                )
+            }
+        }
     }
-}
