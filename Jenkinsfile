@@ -43,25 +43,25 @@ pipeline {
       //               targetRecordSysId: '5b793a6e1bcb6810b54e85d5604bcb09')
       //       }
       //   }
-        stage('combo-scan') {
+      //  stage('combo-scan') {
+      //       steps {
+      //           snInstanceScan(
+      //               url: 'https://chiarngqdemoauthor.service-now.com',
+      //               credentialsId: 'f15c53d0-25d0-41ab-adce-3f60e6bc9217',
+      //              scanType: 'scanWithCombo',
+      //               comboSysId: '12ff94c51b9fa050b54e85d5604bcbc6')
+      //      }
+      //   }
+         stage('suite-scan-scoped-apps') {
              steps {
                  snInstanceScan(
                      url: 'https://chiarngqdemoauthor.service-now.com',
                      credentialsId: 'f15c53d0-25d0-41ab-adce-3f60e6bc9217',
-                     scanType: 'scanWithCombo',
-                     comboSysId: '12ff94c51b9fa050b54e85d5604bcbc6')
-            }
+                     scanType: 'scanWithSuiteOnScopedApps',
+                     suiteSysId: 'fc8d84891b5fa050b54e85d5604bcb6f',
+                     requestBody: '{app_scope_sys_ids:["9058fcaa1bc36810b54e85d5604bcb12","4de70218db3a6810f0eb52c8dc961979"]}')
+             }
          }
-        // stage('suite-scan-scoped-apps') {
-        //     steps {
-        //         snInstanceScan(
-        //             url: 'https://chiarngqdemoauthor.service-now.com',
-        //             credentialsId: 'f15c53d0-25d0-41ab-adce-3f60e6bc9217',
-        //             scanType: 'scanWithSuiteOnScopedApps',
-        //             suiteSysId: 'fc8d84891b5fa050b54e85d5604bcb6f',
-        //             requestBody: '{app_scope_sys_ids:["9058fcaa1bc36810b54e85d5604bcb12","4de70218db3a6810f0eb52c8dc961979"]}')
-        //     }
-        // }
         // stage('suite-scan-update-sets') {
         //     steps {
         //         snInstanceScan(
