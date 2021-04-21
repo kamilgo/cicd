@@ -15,7 +15,7 @@ pipeline {
                 instanceForInstalledAppUrl:"https://chiarngqdemoclient.service-now.com",
                 sysId:'',
                 appScope: "x_fxi_afioristore2",
-                publishedAppVersion: '4.3.18',
+                publishedAppVersion: '4.3.19',
                 rollbackAppVersion: '',
                 progressCheckInterval: null
             )
@@ -46,7 +46,7 @@ pipeline {
                     url: "https://chiarngqdemoclient.service-now.com",
                     credentialsId: "f15c53d0-25d0-41ab-adce-3f60e6bc9217",
                     appScope: "x_fxi_afioristore2",
-                    appVersion: "4.3.18",
+                    appVersion: "4.3.19",
                     baseAppAutoUpgrade: false)
 
                 echo "ServiceNow Parameters after installation stage: ${params.snParam}"
