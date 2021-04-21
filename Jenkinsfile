@@ -52,14 +52,15 @@ pipeline {
                 echo "ServiceNow Parameters after installation stage: ${params.snParam}"
             }
         }
-   //     stage('revert-changes') {
-   //         steps {
-   //             snRollbackApp(
-   //                 url: "https://chiarngqdemoclient.service-now.com",
-   //                 credentialsId: "f15c53d0-25d0-41ab-adce-3f60e6bc9217",
-   //                 appScope: "x_fxi_afioristore2"
-   //             )
-   //         }
-    //    }
+        stage('revert-changes') {
+            steps {
+                snRollbackApp(
+                    url: "https://chiarngqdemoclient.service-now.com",
+                    credentialsId: "f15c53d0-25d0-41ab-adce-3f60e6bc9217",
+                    appScope: "x_fxi_afioristore2",
+                     rollbackAppVersion: "4.3.10"
+                )
+            }
+        }
     }
 }
