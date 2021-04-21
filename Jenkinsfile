@@ -25,24 +25,24 @@ pipeline {
                 echo "ServiceNow Parameters: ${params.snParam}"
             }
         }
-        stage('full-scan') {
-            steps {
-                snInstanceScan(
-                    url: 'https://chiarngqdemoauthor.service-now.com',
-                    credentialsId: 'f15c53d0-25d0-41ab-adce-3f60e6bc9217',
-                    scanType: 'fullScan')
-            }
-        }
-         //stage('point-scan') {
-           //  steps {
-             //    snInstanceScan(
-             //        url: 'https://chiarngqdemoauthor.service-now.com',
-             //        credentialsId: 'f15c53d0-25d0-41ab-adce-3f60e6bc9217',
-             //        scanType: 'pointScan',
-               //      targetTable: 'incident',
-                 //    targetRecordSysId: '5b793a6e1bcb6810b54e85d5604bcb09')
-            // }
-         //}
+      //  stage('full-scan') {
+      //      steps {
+      //          snInstanceScan(
+      //              url: 'https://chiarngqdemoauthor.service-now.com',
+      //              credentialsId: 'f15c53d0-25d0-41ab-adce-3f60e6bc9217',
+      //              scanType: 'fullScan')
+      //      }
+      //  }
+         stage('point-scan') {
+             steps {
+                 snInstanceScan(
+                     url: 'https://chiarngqdemoauthor.service-now.com',
+                     credentialsId: 'f15c53d0-25d0-41ab-adce-3f60e6bc9217',
+                     scanType: 'pointScan',
+                     targetTable: 'incident',
+                     targetRecordSysId: '5b793a6e1bcb6810b54e85d5604bcb09')
+             }
+         }
       //  stage('combo-scan') {
        //      steps {
        //          snInstanceScan(
