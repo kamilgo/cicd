@@ -33,25 +33,25 @@ pipeline {
       //              scanType: 'fullScan')
       //      }
       //  }
-         stage('point-scan') {
+      //   stage('point-scan') {
+      //       steps {
+      //           snInstanceScan(
+      //               url: 'https://chiarngqdemoauthor.service-now.com',
+      //               credentialsId: 'f15c53d0-25d0-41ab-adce-3f60e6bc9217',
+      //               scanType: 'pointScan',
+      //               targetTable: 'incident',
+      //               targetRecordSysId: '5b793a6e1bcb6810b54e85d5604bcb09')
+      //       }
+      //   }
+        stage('combo-scan') {
              steps {
                  snInstanceScan(
                      url: 'https://chiarngqdemoauthor.service-now.com',
                      credentialsId: 'f15c53d0-25d0-41ab-adce-3f60e6bc9217',
-                     scanType: 'pointScan',
-                     targetTable: 'incident',
-                     targetRecordSysId: '5b793a6e1bcb6810b54e85d5604bcb09')
-             }
+                     scanType: 'scanWithCombo',
+                     comboSysId: '12ff94c51b9fa050b54e85d5604bcbc6')
+            }
          }
-      //  stage('combo-scan') {
-       //      steps {
-       //          snInstanceScan(
-       //              url: 'https://chiarngqdemoauthor.service-now.com',
-       //              credentialsId: 'f15c53d0-25d0-41ab-adce-3f60e6bc9217',
-       //              scanType: 'scanWithCombo',
-       //              comboSysId: '12ff94c51b9fa050b54e85d5604bcbc6')
-       //     }
-       //  }
         // stage('suite-scan-scoped-apps') {
         //     steps {
         //         snInstanceScan(
