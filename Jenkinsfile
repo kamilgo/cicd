@@ -7,9 +7,9 @@ pipeline {
     parameters {
             snParam(
                 description: "ServiceNow Parameters",
-                credentialsForPublishedApp: "7b4ca59e-8486-486c-895e-f044a5297447",
+                credentialsForPublishedApp: "f15c53d0-25d0-41ab-adce-3f60e6bc9217",
                 instanceForPublishedAppUrl: "https://chiarngqdemoauthor.service-now.com",
-                credentialsForInstalledApp:"7b4ca59e-8486-486c-895e-f044a5297447",
+                credentialsForInstalledApp:"f15c53d0-25d0-41ab-adce-3f60e6bc9217",
                 instanceForInstalledAppUrl:"https://chiarngqdemoclient.service-now.com",
                 sysId:'',
                 appScope: "x_fxi_afioristore2",
@@ -30,7 +30,7 @@ pipeline {
              steps {
                  snBatchInstall(
                      url: 'https://chiarngqdemoclient.service-now.com'
-                    ,credentialsId: '7b4ca59e-8486-486c-895e-f044a5297447'
+                    ,credentialsId: 'f15c53d0-25d0-41ab-adce-3f60e6bc9217'
                     ,useFile: true
                     //,file: 'now_batch_manifest.json' // not required if this is default file name
                     )
