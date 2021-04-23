@@ -1,0 +1,14 @@
+{
+    "name": "Install afioristore2 in version 4.3.9",
+    "packages": [
+        {
+            "id": "a5116141d0835010f8770be4e4ff53b0",
+            "load_demo_data": false,
+            "notes": "Sample case.",
+            "requested_version": "2.0.0",
+            "requested_customization_version": "4.3.9",
+            "type": "application"
+          }
+    ],
+    "notes": "Example of Batch Install build step."
+}
