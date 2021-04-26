@@ -32,7 +32,7 @@ pipeline {
                      url: 'https://chiarngqdemoclient.service-now.com'
                     ,credentialsId: 'f15c53d0-25d0-41ab-adce-3f60e6bc9217'
                     ,useFile: true
-                    //,file: 'now_batch_manifest.json' // not required if this is default file name
+                    ,file: "${env.WORKSPACE}/now_batch_manifest.json"
                     )
 
                 echo "ServiceNow Parameters after Batch Install: ${params.snParam}"
